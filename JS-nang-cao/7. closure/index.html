@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Closure : tính khép khín, bao đóng của hàm
+
+
+        function createLogger(namespace) {
+            function logger(message) {
+                console.log(`[${namespace}] ${message}`);
+            }
+            return logger;
+        }
+
+        // const infoLogger = createLogger('Info');
+        // infoLogger('Bắt đầu gửi mail');
+
+        // const errorLogger = createLogger('Error');
+        // errorLogger('Lỗi rồi');
+
+        //-----------------
+
+        function createStorage(key) {
+            const store = JSON.parse(localStorage.getItem(key)) ?? {};
+
+            const save = () => {
+                localStorage.setItem(key, JSON.stringify(store));
+            }
+            const storage = {
+                get(key) {
+                    return store[key];
+                },
+                set(key,value){
+                    store[key] = value;
+                    save();
+                },
+                remove(key){
+                    delete store[key];
+                    save();
+                }
+            }
+            return storage;
+        }
+
+        const profileSetting = createStorage('profile_setting');
+        profileSetting.set('full_name', 'Ly Thanh Tung');
+        profileSetting.set('full_name', 'Ly Thanh Tung3');
+        profileSetting.set('age', '25');
+        // profileSetting.remove('full_name');
+        // profileSetting.remove('');
+    </script>
+</body>
+
+</html>

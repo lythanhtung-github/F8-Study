@@ -24,6 +24,9 @@
             //private
             const cars = [];
             return {
+                get(index){
+                   console.log(cars[index]);
+                },
                 add(car) {
                     cars.push(car);
                 },
@@ -36,18 +39,23 @@
             }
         });
 
+        const apps = app();
+        apps.add("carAAA");
+        apps.get(0);
+
+
         //VD
         const number = (function (a, b) {
             //    return a + b;
             a + b;
         })(1, 2);
 
-        console.log(number);
+        console.log(number); // undefined
 
         (function js(x) {
             const y = (j) => j * x;
 
-            console.log(y(s()));
+            console.log(y(s()));//81
 
             function s() {
                 return j();
@@ -56,7 +64,7 @@
             function j() {
                 return x ** x;
             }
-        })(3)
+        })(3) 
     </script>
 </body>
 

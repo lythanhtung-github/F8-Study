@@ -20,7 +20,39 @@
             var b = "bbb";// dùng trong function là phạm vi trong local scope
         }
         // console.log(b);
-        console.log(c);
+        // console.log(c);
+
+
+
+        //--//
+        let age = 10;
+        {
+            let age = 9;
+            {
+                let age = 8;
+                {
+                    let age = 7;
+                    {
+                        let age = 6;
+                        console.log(age);
+                    }
+                }
+            }
+        }
+
+        function makeCounter() {
+            let counter = 0;
+            function increase() {
+                return ++counter;
+            }
+            return increase;
+        }
+
+        const increase1 = makeCounter();
+        console.log(increase1());
+        console.log(increase1());
+        console.log(increase1());
+        console.log(increase1());
     </script>
 </body>
 </html>
