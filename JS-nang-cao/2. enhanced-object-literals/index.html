@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+
+    // 1. Định nghĩa key: value cho object
+    // 2. Định nghĩa method cho object
+    // 3. Định nghĩa key cho object dưới dạng biến
+
+
+    // let name ="lythanhtung";
+    // let price = "10000";
+
+    // var course = {
+    //     name: name,
+    //     price: price
+    // }
+
+
+    // var course = {
+    //     name,
+    //     price
+    // }
+
+
+    // var course = {
+    //     name,
+    //     price,
+    //     getName() {
+    //         return name;
+    //     }
+    // }
+
+    // console.log(course);
+
+
+    // var fieldName = "new-name";
+    // var fieldPrice = "price";
+
+    // var course = {
+    //     name: "javascript",
+    //     [fieldName]: "javascript",
+    //     [fieldPrice]: 1000
+    // }
+    // console.log(course);
+
+
+    // function arrToObj(arr) {
+    //     return Object.fromEntries(arr);
+    // }
+
+    function arrToObj(arr) {
+        return arr.reduce((accumulator, currentValue) => {
+            accumulator[currentValue[0]] = currentValue[1];
+            return accumulator;
+        }, {})
+    }
+
+    // Expected results:
+
+    const obj1 = arrToObj([
+        ['name', 'Son Dang'],
+        ['age', 21],
+        ['address', 'Ha Noi']
+    ])
+
+    console.log(obj1)
+
+    const obj2 = arrToObj([
+        ['name', 'Duc Long'],
+        ['age', 18],
+        ['address', 'Ha Noi']
+    ])
+    console.log(obj2)
+
+</script>
+
+</html>

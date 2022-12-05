@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //IIFE
+        (function () {
+            console.log("IIFE called");
+        })();
+
+        (() => {
+            console.log("arrow called");
+        })();
+
+
+        const app = (function () {
+            //private
+            const cars = [];
+            return {
+                add(car) {
+                    cars.push(car);
+                },
+                update(index, car) {
+                    cars[index] = car;
+                },
+                delete(index) {
+                    cars.splice(index, 1);
+                }
+            }
+        });
+
+        //VD
+        const number = (function (a, b) {
+            //    return a + b;
+            a + b;
+        })(1, 2);
+
+        console.log(number);
+
+        (function js(x) {
+            const y = (j) => j * x;
+
+            console.log(y(s()));
+
+            function s() {
+                return j();
+            }
+
+            function j() {
+                return x ** x;
+            }
+        })(3)
+    </script>
+</body>
+
+</html>

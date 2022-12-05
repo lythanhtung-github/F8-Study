@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        var array = ['html', 'css', 'js'];
+        // var a = array[0];
+        // var b = array[1];
+        // var c = array[2];
+
+        // var [a, b, c] = array;
+        // console.log(a, b, c);
+
+        // var [a, , c] = array;
+        // console.log(a, b, c);
+
+        //rest là tên biến (rest : phần còn lại)
+
+        //khi nào là toán tử rest: khi sử dụng kết hợp destructuring
+        // var [a, ...rest] = array;
+        // console.log(a);
+        // console.log(rest);
+
+        //---------//
+
+        // var course = {
+        //     name: 'js',
+        //     price: 10000,
+        //     description: 'mô tả',
+        //     music: {
+        //         id: 1,
+        //         name: 'Thanh Tung MTP'
+        //     }
+        // }
+
+        // var { name: newName, price, description = 'giá trị mặc định nếu không có trong course', ...restObj } = course;
+        // console.log(name);
+        // console.log(newName);
+        // console.log(restObj);
+        // console.log(description)
+
+
+        // function writeNumber(a,...numbers) { //numbers: rest
+        //     console.log(numbers);
+        // }
+
+        // writeNumber(1, 2, 3);
+
+        
+        function writeObj({name,...restObj}) { //numbers: rest
+            console.log(restObj);
+        }
+
+        writeObj({
+            name: 'obj1',
+            price: 'aaa'
+        })
+    </script>
+</body>
+
+</html>
