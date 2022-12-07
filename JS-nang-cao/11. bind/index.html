@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function.bind()</title>
+</head>
+<body>
+    <button>Click me!</button>
+
+    
+    <script>
+        const $ = document.querySelector.bind(document);
+        // bind() sẽ trả về 1 hàm mới
+        // có thể nhận các đối số như hàm ban đầu
+        const teacher = {
+            firstName : "Lý",
+            lastName : "Thanh Tùng",
+            getFullName(){
+                console.log(`${this.firstName} ${this.lastName}`);
+            }
+    }
+
+    const button = $('button');
+    button.onclick = teacher.getFullName.bind(teacher);
+    </script>
+</body>
+</html>
