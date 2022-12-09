@@ -32,7 +32,7 @@
 
             const save = () => {
                 localStorage.setItem(key, JSON.stringify(store));
-            }
+            };
             const storage = {
                 get(key) {
                     return store[key];
@@ -45,7 +45,7 @@
                     delete store[key];
                     save();
                 }
-            }
+            }; 
             return storage;
         }
 
