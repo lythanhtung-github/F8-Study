@@ -1,0 +1,31 @@
+- NPM 
+	- Project scope: cài nếu dự án cần thư viện
+		- npm install react react-dom => dependencides
+		- npm i react react-dom
+		
+		- npm install -save-dev react react-dom => devDepndencies
+		- npm i -D react react-dom => devDependencides
+
+		- npm uninstall react react-dom: Xóa thư viện
+
+	- Global scope: cài ở thư mục user
+		- npm -i --global create-react-app
+		- npm -i -g create-react-app
+		- npm uninstall -g react react-dom: Xóa thư viện
+		- cần quyền root thì thêm `sudo` trước câu lệnh
+
+- NPX: Cài Node => NPM, NPX (mặc định cài NPM và NPX)
+	Tại sao dùng NPX?
+	kiểm tra có phải là 1 project hay không: npx create-react-app
+	- Gặp lỗi khi : npx create-react-app tiktok (chọc tới npm khi máy k có, luôn tải bản mới về)
+
+- YARN & NPM
+	-YARN ra mắt để hạn chế những vấn đề của npm lúc trước
+	- Dùng NPM có file package.json
+	- Dùng YARN có file yarn.json
+	- Quản lý tất cả thư viện (thư viện trong thư viện) có file package-lock.json hoặc yarn-lock.json
+	
+	- re-install: yarn nhanh hơn(tốn dung lượng hơn)
+	
+	- cài yarn: sudo npm i -g yarn
+

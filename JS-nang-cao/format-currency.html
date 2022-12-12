@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+
+<body>
+    <input class="CurrencyInput" type="text">
+    <input id="result"></input>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script>
+        function formatCurrency() {
+            $('input.CurrencyInput').on('input', function () {
+                const value = this.value.replace(/,/g, '');
+                this.value = parseFloat(value).toLocaleString('en-US', {
+                    style: 'decimal',
+                    maximumFractionDigits: 2,
+                });
+                $('#result').val($('input.CurrencyInput').val());
+            });
+          
+        }
+        formatCurrency();
+
+    </script>
+</body>
+
+</html>
