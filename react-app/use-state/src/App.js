@@ -137,7 +137,7 @@ function App() {
     setChecked(prev => {
       const isChecked = checked.includes(id);
       if (isChecked) {
-        return checked.filter(item => item !== id);
+        return checked.filter((item) => item !== id);
       } else {
         return [...prev, id];
       }
