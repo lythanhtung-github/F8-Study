@@ -14,6 +14,7 @@ const tabs = ['posts', 'comments', 'albums', 'photos', 'todos', 'users'];
 function Content() {
     const [posts, setPosts] = useState([]);
     const [type, setType] = useState('posts');
+    const [showGoToTop, setShowGoToTop] = useState(false);
 
     useEffect(() => {
         fetch(`https://jsonplaceholder.typicode.com/${type}`)
@@ -23,7 +24,17 @@ function Content() {
             })
     }, [type]);
 
-
+    useEffect(() => {
+        const handleScroll = () => {
+            setShowGoToTop(window.scrollY >= 200)
+        }
+        window.addEventListener('scroll', handleScroll);
+        console.log('add')
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            console.log('remove')
+        }
+    }, [])
     return (
         <div>
             {
@@ -42,12 +53,31 @@ function Content() {
             }
             <table>
                 <thead>
-                    <th>Content</th>
+                    <tr>
+                        <th>Content</th>
+                    </tr>
                 </thead>
-                {posts.map((post) => (
-                    <tr key={post.id}>{post.title || post.name}</tr>
-                ))}
+                <tbody>
+                    {posts.map((post) => (
+                        <tr key={post.id}>
+                            <td>{post.title || post.name}</td>
+                        </tr>
+                    ))}
+                </tbody>
             </table>
+            {showGoToTop && (
+                <button
+                    style={{
+                        position: 'fixed',
+                        right: '20px',
+                        bottom: '20px',
+                        backgroundColor: '#333',
+                        color: 'white'
+                    }}
+                >
+                    Go to top
+                </button>
+            )}
         </div>
     )
 }
