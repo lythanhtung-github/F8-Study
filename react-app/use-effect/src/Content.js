@@ -29,10 +29,9 @@ function Content() {
             setShowGoToTop(window.scrollY >= 200)
         }
         window.addEventListener('scroll', handleScroll);
-        console.log('add')
+
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            console.log('remove')
         }
     }, [])
     return (

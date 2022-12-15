@@ -148,7 +148,6 @@ function App() {
     console.log(checked);
   }
 
-
   return (
     <div className="App" style={{ padding: 30 }}>
       {
@@ -167,6 +166,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

@@ -1,0 +1,28 @@
+*{
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#userImage{
+  border-radius: 10px;
+}
+
+input:checked + label {
+  color: red;
+  font-weight: bold;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.form-label{
+  font-weight: bold;
+}
