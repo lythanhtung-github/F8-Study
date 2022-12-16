@@ -229,7 +229,7 @@ function Container() {
                             </div>
                         </div>
                         <hr />
-                        <button type="submit" className="btn btn-primary .ms-1">
+                        <button type="submit" className="btn btn-primary">
                             <i className="fa fa-check" aria-hidden="true"></i> Register
                         </button>
                     </div>
