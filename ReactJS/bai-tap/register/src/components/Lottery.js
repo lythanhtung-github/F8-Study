@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import Marquee from "react-fast-marquee";
 
 function Lottery() {
     const [lotteryResults, setLotteryResults] = useState({});
@@ -117,9 +118,9 @@ function Lottery() {
     return (
 
         <div className='container vh-100'>
-            <marQuee direction="left" scrollAmount="15" className = 'mt-2'>
+            <Marquee direction="left" speed='20' className = 'mt-2'>
                 <span className='h1 text-center'>XỔ SỐ KIẾN THIẾT MIỀN TRUNG </span>
-            </marQuee>
+            </Marquee>
             
             <hr />
             <div className='col-sm-12'>

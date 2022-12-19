@@ -1,19 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
-
-let provinces = [
-    { province_id: '1', province_name: 'Huế' }
-];
-function getAllProvinces() {
-    fetch("https://vapi.vnappmob.com/api/province/")
-        .then((res) => res.json())
-        .then((res) => res.results)
-        .then((res) => {
-            provinces.push(...res)
-        })
-}
-getAllProvinces();
-console.log(provinces);
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 const hobbits = [
     {
@@ -54,9 +41,36 @@ const genders = [
 ];
 
 function Container() {
-    const [user, setUser] = useState({ gender: 1 });
+    const [user, setUser] = useState({ gender: 1, province: "01", district: "271", ward: "09619" });
+    const [provinces, setProvinces] = useState([]);
+    const [districts, setDistricts] = useState([]);
+    const [wards, setWards] = useState([]);
     const [hobbit, setHobbit] = useState([]);
     const [avatar, setAvatar] = useState();
+
+    useEffect(() => {
+        async function getData() {
+            let resProvinces = await axios.get("https://vapi.vnappmob.com/api/province/");
+            let resDistricts = await axios.get(`https://vapi.vnappmob.com/api/province/district/${resProvinces.data.results[0].province_id}`);
+            let resWards = await axios.get(`https://vapi.vnappmob.com/api/province/ward/${resDistricts.data.results[0].district_id}`);
+            setProvinces(resProvinces.data.results);
+            setDistricts(resDistricts.data.results);
+            setWards(resWards.data.results);
+        }
+        getData();
+    }, [user])
+
+    useEffect(() => {
+        async function getData() {
+            let resProvinces = await axios.get("https://vapi.vnappmob.com/api/province/");
+            let resDistricts = await axios.get(`https://vapi.vnappmob.com/api/province/district/${user.province}`);
+            let resWards = await axios.get(`https://vapi.vnappmob.com/api/province/ward/${user.district}`);
+            setProvinces(resProvinces.data.results);
+            setDistricts(resDistricts.data.results);
+            setWards(resWards.data.results);
+        }
+        getData();
+    }, [user])
 
     const handleChange = (e) => {
         setUser({
@@ -74,7 +88,9 @@ function Container() {
             email: "",
             fullName: "",
             phone: "",
-            province: provinces[0].name,
+            province: "01",
+            district: "271",
+            ward: "09619",
             gender: 1
         })
         setHobbit([]);
@@ -98,9 +114,9 @@ function Container() {
         // e.target.value = null;
     }
 
-    const { email, fullName, phone, province, gender } = user;
+    const { email, fullName, phone, province, district, ward, gender } = user;
     return (
-        <div className="container vh-100">
+        <div className="container">
             <form onSubmit={handleSubmit}>
                 <h1 className="mt-2 display-3 text-center">ĐĂNG KÝ</h1>
                 <hr />
@@ -151,7 +167,7 @@ function Container() {
                                     <select className='form-select'
                                         id='province'
                                         name='province'
-                                        value={province || provinces[0].province_name}
+                                        value={province}
                                         onChange={handleChange}
                                     >
                                         {
@@ -160,6 +176,50 @@ function Container() {
                                                     key={province.province_id}
                                                 >
                                                     {province.province_name}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-sm-12 row'>
+                            <div className='form-group mt-2 col-sm-6'>
+                                <label htmlFor='district' className="form-label">District:</label>
+                                <div className="col-sm-12">
+                                    <select className='form-select'
+                                        id='district'
+                                        name='district'
+                                        value={district}
+                                        onChange={handleChange}
+                                    >
+                                        {
+                                            districts.map((district) => (
+                                                <option value={district.district_id}
+                                                    key={district.district_id}
+                                                >
+                                                    {district.district_name}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className='form-group mt-2 col-sm-6'>
+                                <label htmlFor='ward' className="form-label">Ward:</label>
+                                <div className="col-sm-12">
+                                    <select className='form-select'
+                                        id='ward'
+                                        name='ward'
+                                        value={ward}
+                                        onChange={handleChange}
+                                    >
+                                        {
+                                            wards.map((ward) => (
+                                                <option value={ward.ward_id}
+                                                    key={ward.ward_id}
+                                                >
+                                                    {ward.ward_name}
                                                 </option>
                                             ))
                                         }
@@ -238,7 +298,7 @@ function Container() {
                             className='mt-2 col-sm-12'
                             src={
                                 avatar ? avatar.preview : 'https://image2.tin247.news/pictures/2022/02/10/pnt1644467741.jpeg'
-                            } 
+                            }
                             alt=""
                             id='userImage'
                             name='userImage'
