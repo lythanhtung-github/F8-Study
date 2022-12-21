@@ -41,36 +41,57 @@ const genders = [
 ];
 
 function Container() {
-    const [user, setUser] = useState({ gender: 1, province: "01", district: "271", ward: "09619" });
+    const [user, setUser] = useState({ gender: 1 });
+    const [hobbit, setHobbit] = useState([]);
+    const [avatar, setAvatar] = useState();
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [wards, setWards] = useState([]);
-    const [hobbit, setHobbit] = useState([]);
-    const [avatar, setAvatar] = useState();
+    const [provinceId, setProvinceId] = useState('01');
+    const [districtId, setDistrictId] = useState('271');
+    const [wardId, setWardId] = useState('09619');
+
 
     useEffect(() => {
-        async function getData() {
+        async function getProvince() {
             let resProvinces = await axios.get("https://vapi.vnappmob.com/api/province/");
-            let resDistricts = await axios.get(`https://vapi.vnappmob.com/api/province/district/${resProvinces.data.results[0].province_id}`);
+            setProvinces(resProvinces.data.results);
+        }
+        getProvince();
+    }, [])
+
+    useEffect(() => {
+        setProvinceId(provinceId);
+        async function getData() {
+            let resDistricts = await axios.get(`https://vapi.vnappmob.com/api/province/district/${provinceId}`);
+            setDistricts(resDistricts.data.results);
             let resWards = await axios.get(`https://vapi.vnappmob.com/api/province/ward/${resDistricts.data.results[0].district_id}`);
-            setProvinces(resProvinces.data.results);
-            setDistricts(resDistricts.data.results);
             setWards(resWards.data.results);
         }
         getData();
-    }, [user])
+
+    }, [provinceId])
 
     useEffect(() => {
-        async function getData() {
-            let resProvinces = await axios.get("https://vapi.vnappmob.com/api/province/");
-            let resDistricts = await axios.get(`https://vapi.vnappmob.com/api/province/district/${user.province}`);
-            let resWards = await axios.get(`https://vapi.vnappmob.com/api/province/ward/${user.district}`);
-            setProvinces(resProvinces.data.results);
-            setDistricts(resDistricts.data.results);
+        setDistrictId(districtId);
+        async function getWard() {
+            let resWards = await axios.get(`https://vapi.vnappmob.com/api/province/ward/${districtId}`);
             setWards(resWards.data.results);
         }
-        getData();
-    }, [user])
+        getWard();
+    }, [districtId])
+
+    const handleSetProvinceId = (e) => {
+        setProvinceId(e.target.value)
+    }
+
+    const handleSetDistrictId = (e) => {
+        setDistrictId(e.target.value);
+    }
+
+    const handleSetWardId = (e) => {
+        setWardId(e.target.value)
+    }
 
     const handleChange = (e) => {
         setUser({
@@ -81,19 +102,19 @@ function Container() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({ ...user, hobbit, avatar });
+        console.log({ ...user, hobbit, avatar, provinceId, districtId, wardId });
 
         setUser({
             ...user,
             email: "",
             fullName: "",
             phone: "",
-            province: "01",
-            district: "271",
-            ward: "09619",
             gender: 1
         })
         setHobbit([]);
+        setProvinceId('01');
+        setDistrictId('271');
+        setWardId('09619');
     }
 
     const handleCheck = (id) => {
@@ -114,7 +135,7 @@ function Container() {
         // e.target.value = null;
     }
 
-    const { email, fullName, phone, province, district, ward, gender } = user;
+    const { email, fullName, phone, gender } = user;
     return (
         <div className="container">
             <form onSubmit={handleSubmit}>
@@ -167,8 +188,8 @@ function Container() {
                                     <select className='form-select'
                                         id='province'
                                         name='province'
-                                        value={province}
-                                        onChange={handleChange}
+                                        value={provinceId}
+                                        onChange={(e) => handleSetProvinceId(e)}
                                     >
                                         {
                                             provinces.map((province) => (
@@ -190,8 +211,8 @@ function Container() {
                                     <select className='form-select'
                                         id='district'
                                         name='district'
-                                        value={district}
-                                        onChange={handleChange}
+                                        value={districtId}
+                                        onChange={(e) => handleSetDistrictId(e)}
                                     >
                                         {
                                             districts.map((district) => (
@@ -211,8 +232,8 @@ function Container() {
                                     <select className='form-select'
                                         id='ward'
                                         name='ward'
-                                        value={ward}
-                                        onChange={handleChange}
+                                        value={wardId}
+                                        onChange={(e) => handleSetWardId(e)}
                                     >
                                         {
                                             wards.map((ward) => (
